@@ -1,3 +1,5 @@
+ARG GIT_TOKEN=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
+
 #Deriving the latest base image
 FROM    ubuntu:focal
 
@@ -93,7 +95,7 @@ RUN git checkout ${COMMIT}
 
 WORKDIR /srsran/build
 
-RUN cmake -j$(nproc) ../
+RUN cmake -j$(nproc) ../ -D USE_LTE_RATES=ON
 RUN make -j$(nproc)
 RUN make -j$(nproc) install
 RUN srsran_install_configs.sh user
@@ -108,7 +110,7 @@ RUN ldconfig
 WORKDIR /home
 RUN git config --global user.name "Oren Collaco"
 RUN git config --global user.email "orencollaco97@gmail.com"
-RUN git clone https://nero7991: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@github.com/CCI-NextG-Testbed/GoogleSASClient
+RUN git clone https://nero7991:${GIT_TOKEN}@github.com/CCI-NextG-Testbed/GoogleSASClient
 WORKDIR /home/GoogleSASClient
 RUN pip install -r requirements.txt
 RUN chmod +x start_cbsd.sh
