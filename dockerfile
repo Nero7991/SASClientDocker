@@ -1,4 +1,4 @@
-ARG GIT_TOKEN=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
+ARG GIT_TOKEN=
 
 #Deriving the latest base image
 FROM    ubuntu:focal
@@ -110,7 +110,7 @@ RUN ldconfig
 WORKDIR /home
 RUN git config --global user.name "Oren Collaco"
 RUN git config --global user.email "orencollaco97@gmail.com"
-RUN git clone https://nero7991:${GIT_TOKEN}@github.com/CCI-NextG-Testbed/GoogleSASClient
+RUN git clone https://nero7991:@github.com/CCI-NextG-Testbed/GoogleSASClient
 WORKDIR /home/GoogleSASClient
 RUN pip install -r requirements.txt
 RUN chmod +x start_cbsd.sh
